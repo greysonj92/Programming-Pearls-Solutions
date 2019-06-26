@@ -1,4 +1,5 @@
 #include<iostream>
+#include<fstream>
 #include<string>
 #include<set>
 #include<time.h>
@@ -33,21 +34,35 @@ using namespace std;
 	 return bin;
  }
 
- //code from book
- void gensets(int m, int n) {
+ //code from book, modified to output numbers to text file instead of cout
+ void gensets(int m, int n, ofstream &inputfile) {
 	 set<int> S;
 	 while (S.size() < m)
 		 S.insert(bigrand() % n);
 	 set<int>::iterator i;
 	 for (i = S.begin(); i != S.end(); i++)
-		 cout << *i << "\n";
+		 inputfile << *i << "\n";
+ }
+
+ //takes an array initialized as zeros as input, performs a bitmap sort, returns the array
+ void bitmapsort(int &input) {
+
  }
 
 int main() {
 	
+	//generates the list of random numbers and writes them to a file
 	srand(time(NULL));
-	int i = 10000;
-	gensets(10000, 1000000);
+	ofstream outputfile;
+	outputfile.open("Sortedlist.txt");
+	cout << "Enter the amount of random integers you want:";
+	int numberofintegers;
+	cin >> numberofintegers;
+	cout << "Enter the top value of the random integers:";
+	int topvalue;
+	cin >> topvalue;
+	gensets(numberofintegers, topvalue, outputfile);
+	outputfile.close();
 
 	system("pause");
 	return 0;
